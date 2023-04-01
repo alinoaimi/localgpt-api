@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "6e8666ea-ba68-4939-b138-15375aaac581",
+		"name": "LocalGPT API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Conversation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/conversations",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"conversations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Conversations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/conversations",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"conversations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"conversation_id\": 2,\n    \"text\": \"hello there 22\",\n    \"author\": \"computer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/messages",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Messages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"conversation_id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/messages?filter[conversation_id]=2&sort[]=id,asc",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"messages"
+					],
+					"query": [
+						{
+							"key": "filter[conversation_id]",
+							"value": "2"
+						},
+						{
+							"key": "sort[]",
+							"value": "id,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
