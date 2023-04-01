@@ -2,9 +2,19 @@ require('dotenv').config();
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const http = require('http');
 
 const app = express()
-const port = process.env.API_PORT || 8190
+const server = http.createServer(app);
+
+const { Server } = require("socket.io");
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+    }
+});
+
+const port = process.env.API_PORT || 1092
 
 
 app.use(bodyParser.json())
@@ -29,6 +39,11 @@ app.use('/', require('./routes')(app))
 
 app.use(require('./middlewere/handleErrors'))
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+io.on('connection', (socket) => {
+    console.log('a user connected');
+});
+
+
+server.listen(port, () => {
+    console.log(`localgpt-api listening on port ${port}`)
 })

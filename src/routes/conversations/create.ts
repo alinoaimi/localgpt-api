@@ -10,7 +10,7 @@ module.exports = function (app) {
 
 
 
-    // Create a user
+    // Create a conversation
     router.post('/', [showValidationErrors], async (req, res, next) => {
 
 
@@ -21,7 +21,10 @@ module.exports = function (app) {
             res.json({
                 conversation_id: result[0],
                 title: 'new conversation'
-            })
+            });
+
+
+
         }).catch(error => {
             next(new SuperError(['database_error'], responses.INTERNAL));
         })

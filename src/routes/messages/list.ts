@@ -10,7 +10,6 @@ const QueryTranslate = require('query_translate')
 module.exports = function (app) {
 
 
-    // let groupsClass = new GroupsClass(app.settings.bookshelf, app.settings.models);
 
     router.get('/', [check('conversation_id').exists()], async (req, res, next) => {
 

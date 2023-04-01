@@ -8,7 +8,6 @@ let showValidationErrors = require('../../middlewere/showValidationErrors')
 module.exports = function (app) {
 
 
-    // let groupsClass = new GroupsClass(app.settings.bookshelf, app.settings.models);
 
     router.get('/', [], async (req, res, next) => {
 
