@@ -19,10 +19,14 @@ const port = process.env.API_PORT || 1092
 
 app.use(bodyParser.json())
 
+let argv = require('minimist')(process.argv.slice(2));
+
+// console.log(argv);
+
 const knex = require('knex')({
     client: 'better-sqlite3',
     connection: {
-        filename: "database.db",
+        filename: argv['db'] || process.env.DATABASE_PATH || "database.db",
         // options: {
         //     nativeBinding: "database.db",
         // },
@@ -30,11 +34,18 @@ const knex = require('knex')({
 });
 
 app.set('knex',knex);
+app.set('socketio', io);
 
 
 
 // all routes
 app.use('/', require('./routes')(app))
+
+app.get('/ping', (req, res) => {
+    res.json({
+        success: true
+    })
+})
 
 
 app.use(require('./middlewere/handleErrors'))
@@ -42,6 +53,8 @@ app.use(require('./middlewere/handleErrors'))
 io.on('connection', (socket) => {
     console.log('a user connected');
 });
+
+
 
 
 server.listen(port, () => {

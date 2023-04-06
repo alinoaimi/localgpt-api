@@ -16,14 +16,15 @@ module.exports = function (app) {
 
         await app.get('knex')('conversations').insert({
             title: 'new conversation',
-            create_time: Date.now()
+            create_time: Date.now(),
+            engine: req.body.engine,
+            model_path: req.body.model_path
         }).then(result => {
+
             res.json({
                 conversation_id: result[0],
                 title: 'new conversation'
             });
-
-
 
         }).catch(error => {
             next(new SuperError(['database_error'], responses.INTERNAL));
