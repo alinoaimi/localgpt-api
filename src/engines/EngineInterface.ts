@@ -37,7 +37,7 @@ export class EngineInterface {
         this.state = 'booting';
 
         this.shell = spawn('bash');
-        this.shell.stdin.write(`/Users/ghost/Documents/projects/offlinegpt/gpt4all/gpt4all/chat/gpt4all-lora-quantized-OSX-m1 -m '${this.modelPath}'\n`);
+        this.shell.stdin.write(`${process.env.GPT4ALL_PATH} -m '${this.modelPath}'\n`);
         this.updatesEmitter.emit('state', 'booting_engine');
 
         this.shell.stdout.on('data', (data) => {
